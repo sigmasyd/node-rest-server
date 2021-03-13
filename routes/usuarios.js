@@ -3,8 +3,8 @@ const { usuariosGet, usuariosPost, usuariosPut, usuariosDelete } = require('../c
 const router = Router();
 
 router.get('/', usuariosGet);
-router.put('/', usuariosPost);
-router.post('/', usuariosPut);
+router.post('/', usuariosPost);
+router.put('/:id', usuariosPut);
 router.delete('/', usuariosDelete);
 
 module.exports = router;
