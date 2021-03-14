@@ -1,6 +1,7 @@
 // es redundante porque ya se autoimporta.. pero se lo pone
 // para que vscode detecte y cargue las funciones
 const {request,response} = require('express');
+const Usuario = require('../models/usuario');
 
 const usuariosGet = (req = request, res=response) => {
   const {q,nombre='No name',apiKey,page=1,limit=5} = req.query;
@@ -13,11 +14,14 @@ const usuariosGet = (req = request, res=response) => {
         limit
     });
 }
-const usuariosPost = (req, res=response) => {
-  const {nombre} = req.body;
+const usuariosPost = async (req, res=response) => {
+  const body = req.body;
+  const usuario = new Usuario(body);
+  await usuario.save();
+
   res.json({
       msg: "POST ... controller",
-      nombre
+      usuario
   });
 }
 const usuariosPut = (req, res) => {    
